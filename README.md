@@ -19,5 +19,4 @@ npm run build
 ```
 npm run lint
 ```
-"# vue-course" 
-"# vue-course" 
+
