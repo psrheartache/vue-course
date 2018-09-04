@@ -3,6 +3,7 @@ import Home from '@/views/Home.vue'
 export default [
   {
     path: '/',
+    alias:'/home_page',
     name: 'home',
     component: Home
   },
@@ -17,11 +18,13 @@ export default [
   {
     //传参路由
     path:'/argu/:name',
+    name:'argu',
     component: () => import('@/views/argu.vue')
   },
   {
     //嵌套路由
     path:'/parent',
+    name:'parent',
     component: () => import('@/views/parent.vue'),
     children:[
       {
@@ -32,7 +35,7 @@ export default [
     //命名路由-name
   },
   {
-    //命名视图 
+    //命名视图
     path:'/named_view',
     name:'three',
     components:{
@@ -49,8 +52,8 @@ export default [
     // }
     redirect: to =>{
       return{
-        name:'three'
+        name:'three' 
       } 
     }
-  }
+  },
 ]
