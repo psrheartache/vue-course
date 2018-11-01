@@ -17,16 +17,16 @@ export default {
   components: {
     HelloWorld
   },
-  beforeRouteEnert: (to, from,  next) => {
-      //  const leave = confirm('您确定要离开当前页面吗?')
-      //  if (leave) next()
-      //  else next(false)
-  },
-  beforeRouteLeave: (to, from,  next) => {
-       const leave = confirm('您确定要离开当前页面吗?')
-       if (leave) next()
-       else next(false)
-  },
+  // beforeRouteEnert: (to, from,  next) => {
+  //     //  const leave = confirm('您确定要离开当前页面吗?')
+  //     //  if (leave) next()
+  //     //  else next(false)
+  // },
+  // beforeRouteLeave: (to, from,  next) => {
+  //      const leave = confirm('您确定要离开当前页面吗?')
+  //      if (leave) next()
+  //      else next(false)
+  // },
   methods:{
     handleClick (type) {
       //this.$router.go(1) //前进一页

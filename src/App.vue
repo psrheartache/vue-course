@@ -4,9 +4,11 @@
       <router-link :to="{name:'home'}">Home</router-link> |
       <router-link :to="{name:'about'}">About</router-link>
     </div>
-    <router-view/>
-    <router-view name="email"/>
-    <router-view name="tel"/>
+    <transition-group :name="routerTransition">
+          <router-view key="default"/>
+          <router-view key="email" name="email"/>
+          <router-view key="tel" name="tel"/>
+    </transition-group>
   </div>
 </template>
 
@@ -29,3 +31,12 @@
   }
 }
 </style>
+<script>
+    export default {
+      data () {
+          return{
+              routerTransition: ''
+          }
+      }
+    }
+</script>

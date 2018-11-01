@@ -6,11 +6,11 @@ export default [
     alias:'/home_page',
     name: 'home',
     component: Home,
-    beforeEnter:  (to, from,  next) => {
-        if (from.name === 'about') alert('这是从About页来的')
-        else alert('这不是从About页来的')
-        next()
-    }
+    // beforeEnter:  (to, from,  next) => {
+    //     if (from.name === 'about') alert('这是从About页来的')
+    //     else alert('这不是从About页来的')
+    //     next()
+    // }
   },
   {
     path: '/about',
@@ -29,7 +29,8 @@ export default [
     //传参路由
     path:'/argu/:name',
     name:'argu',
-    component: () => import('@/views/argu.vue')
+    component: () => import('@/views/argu.vue'),
+    props: true
   },
   {
     //嵌套路由
@@ -60,11 +61,16 @@ export default [
     // redirect:{
     //    name:'home'
     // }
-    redirect: to =>{
-      return{
-        name:'three' 
-      } 
-    }
+    // redirect: to =>{
+    //   return{
+    //     name:'three' 
+    //   } 
+    // }
+  },
+  {
+    path: '/store',
+    name:'store',
+    component:() => import('@/views/store.vue')
   },
   {
     path:'*',
