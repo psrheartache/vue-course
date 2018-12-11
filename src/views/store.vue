@@ -1,6 +1,7 @@
 <template>
     <div id='mobanApp'>{{ appName }} -> {{ appNameWithVersion }}
-      <a-input :value="jk" @input="jkChange"></a-input>
+      <!-- <a-input :value="jk" @input="jkChange"></a-input> -->
+      <a-input v-model="jk"></a-input>
       <h1>哈哈：{{ jk }}</h1>
       <h1>{{ firstLetter }}</h1>
       <h1> {{ appVersion }}</h1>
@@ -42,8 +43,17 @@ export default {
     ...mapState({
       appVersion: state => state.appVersion,
       todoList: state => state.todo ? state.todo.todoList : [],
-      jk: state => state.jk,
+      // jk: state => state.jk,
     }),
+
+    jk:{
+      get () {
+         return this.$store.state.jk
+      },
+      set (value) {
+        this.SET_JK(value)
+      }
+    },
 
     valueLastLetter ()  {
       // return this.inputValue.substr(-1, 1)
@@ -157,8 +167,8 @@ export default {
 
 <style>
     #mobanApp{
-      height 100%
-      width  100%
+      height: 100%;
+      width:  100%;
     }
 
     input{
