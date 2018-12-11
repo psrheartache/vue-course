@@ -1,7 +1,7 @@
 
 
 const state = {
-  //
+  userName: 'Cyf'
 }
 
 const mutations = {
@@ -12,7 +12,8 @@ const actions = {
   //
 }
 
-export default{
+export default{ 
+  namespaced: true,
   state,
   mutations,
   actions
