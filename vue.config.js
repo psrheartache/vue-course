@@ -1,36 +1,65 @@
+const webpack = require('webpack')
 const path = require('path')
 
-const resolve = dir => path.join(__dirname, dir)
-
-const BASE_URL = process.env.NODE_ENV === 'procution' ? '/iview-admin' : '/'
-
-//去console插件
-// const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-//gzip压缩插件
-// const CompressionWebpackPlugin = require('compression-webpack-plugin')
+function resolve(dir) {
+  return path.join(__dirname, dir)
+}
 
 module.exports = {
+  //eslinst语法检查
   lintOnSave: false,
-  baseUrl: BASE_URL,
+
+  // lintOnSave: process.env.NODE_ENV !== 'production'
+
+  //webpack打包，静态文件引用路径, js,css引用地址
+  baseUrl: process.env.NODE_ENV === 'production' ? '//10.8.99.203:8080/dist' : '/',
+
+  //css预处理器配置
+  css: {
+    loaderOptions: {
+      stylus: {
+        'resolve url': true,
+        'import': [
+          './src/theme'
+        ]
+      },
+      postcss: {
+        plugins: [
+          require('postcss-pxtorem')({
+            rootValue: 37.5, // 换算的基数
+            selectorBlackList: ['weui', 'mu','cube-'], // 忽略转换正则匹配项
+            propList: ['*'],
+          }),
+        ]
+      }
+    }
+  },
+
+  //插件引入，cube-ui
+  pluginOptions: {
+    'cube-ui': {
+      postCompile: true,
+      theme: true
+    }
+  },
+
+  //webpack打包定义全局访问路径
   chainWebpack: config => {
     config.resolve.alias
-      .set('@',resolve('src'))  //用来定义到Src文件夹的路径
-      .set('_c',resolve('src/components')) //到组件
-      .set('assets',resolve('src/assets'))
-      // .set('components',resolve('src/components'))
+      .set('src', resolve('src'))
+      .set('views', resolve('src/views'))
+      .set('components', resolve('src/components'))
+      .set('assets', resolve('src/assets'))
+      .set('common', resolve('src/common'))
+      .set('api', resolve('src/api'))
+      .set('config', resolve('src/config'))
+      .set('lib', resolve('src/lib'))
   },
-  //打包时不生成map文件
-  productionSourceMap: false,
-  //跨域代理
-  devServer:{
 
-    // host: '0.0.0.0',
-    // port: 8080,
-    // https: false,
-    // hotOnly: false,
-    // proxy: null, // string | Object
-
-    proxy: 'http://localhost:6000',
-    port:'7777',
-  }
+  //本地服务器代理
+  devServer: {
+    host : '0.0.0.0',
+    // proxy: 'http://localhost:7777',  //ip
+    port: '8080',   //端口
+  },
 }
